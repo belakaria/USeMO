@@ -3,6 +3,8 @@
 
 This repository contains the python implementation for USeMO from the AAAI 2020 paper "[Uncertainty-Aware Search Framework for Multi-Objective Bayesian Optimization](https://aiide.org/ojs/index.php/AAAI/article/view/6561)". 
 
+The implementation handles automatically the batch version of the algorithm by setting the variable "batch_size" to a number higher than 1. 
+
 
 ### Requirements
 The code is implemented in Python and requires the following packages:

@@ -7,17 +7,11 @@ Created on Mon Oct 29 14:34:01 2018
 import os
 import numpy as np
 import math
-#from pygmo import hypervolume
 from model import GaussianProcess
-import time
-#from scipy.optimize import minimize
-#import matplotlib.cm as cm
 from scipy.stats import norm
 import scipy
-#import matplotlib.pyplot as plt
 from platypus import NSGAII, Problem, Real
 import sobol_seq
-#import pygmo as pg
 from pygmo import hypervolume
 
 ######################Algorithm input##############################
@@ -76,9 +70,9 @@ def compute_beta(iter_num,d):
     beta=math.sqrt(mu*tau)
 #    beta =0.125* np.log(2*iter_num+1)
     return beta
-############################################################
+############################Set aquisation function 
 acquisation=TS
-batch_len=1
+batch_size=1 #In case you need batch version, you can set the batch size here 
 ###################GP Initialisation##########################
 
 GPs=[]
@@ -131,7 +125,7 @@ for l in range(100):
     LBs=[[GPs[i].getPrediction(np.asarray(np.asarray(x)))[0][0]-beta*GPs[i].getPrediction(np.asarray(np.asarray(x)))[1][0] for i in range(len(GPs))] for x in cheap_pareto_set_unique]
     uncertaities= [scipy.spatial.Rectangle(UBs[i], LBs[i]).volume() for i in range(len(cheap_pareto_set_unique))]
     
-    batch_indecies=np.argsort(uncertaities)[::-1][:batch_len]
+    batch_indecies=np.argsort(uncertaities)[::-1][:batch_size]
     batch=[cheap_pareto_set_unique[i] for i in batch_indecies]
 
 

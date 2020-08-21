@@ -1,8 +1,6 @@
-import math
 import numpy as np
 from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.gaussian_process.kernels import RBF, ConstantKernel,Matern
-import logging
 
 class GaussianProcess:
     def __init__(self, dim):
