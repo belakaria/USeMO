@@ -12,8 +12,6 @@ class GaussianProcess:
      
     def fitModel(self):
         self.model.fit(self.xValues, self.yValues)
-    def fitprevModel(self):
-        self.model.fit(self.xValues[:-1], self.yValues[:-1])
     
     def addSample(self, x, y):
         self.xValues.append(x)

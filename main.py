@@ -6,14 +6,12 @@ Created on Mon Oct 29 14:34:01 2018
 """
 import os
 import numpy as np
-import math
 from model import GaussianProcess
-from scipy.stats import norm
 import scipy
 from platypus import NSGAII, Problem, Real
 import sobol_seq
 from pygmo import hypervolume
-
+from acquisitions import UCB, LCB, TS, ei, pi,compute_beta
 ######################Algorithm input##############################
 paths='.'
 
@@ -40,38 +38,8 @@ grid = sobol_seq.i4_sobol_generate(d,1000,np.random.randint(0,1000))
 design_index = np.random.randint(0, grid.shape[0])
 
 
-############################acquisation functions#############################
-def UCB(x,beta,GP):
-    mean,std=GP.getPrediction(x)
-    return mean + beta*std
-def LCB(x,beta,GP):
-    mean,std=GP.getPrediction(x)
-    return mean - beta*std
-def TS(x,beta,GP):
-    mean=GP.model.sample_y(x.reshape(1,-1))
-    mean=mean[0]
-    return mean
-def ei(x,beta,GP):
-    mean,std=GP.getPrediction(x)
-    y_best=min(GP.yValues)
-    xi=1e-3    
-    z = (y_best-xi-mean)/std
-    return -1*(std*(z*norm.cdf(z) + norm.pdf(z)))
-def pi(x,beta,GP):
-    mean,std=GP.getPrediction(x)
-    y_best=max(GP.yValues)
-    xi=1e-3    
-    z = (y_best-xi-mean)/std
-    return -1*norm.cdf(z)
-############function that gives the UCB variable at each iteration
-def compute_beta(iter_num,d):
-    mu=0.5
-    tau=2*math.log((pow(iter_num,(d/2)+2)*pow(math.pi,2))/(3*0.05))
-    beta=math.sqrt(mu*tau)
-#    beta =0.125* np.log(2*iter_num+1)
-    return beta
 ############################Set aquisation function 
-acquisation=TS
+acquisation=ei
 batch_size=1 #In case you need batch version, you can set the batch size here 
 ###################GP Initialisation##########################
 
@@ -147,4 +115,4 @@ for l in range(100):
 #    print("hypervolume ", hypervolume((np.asarray(simple_pareto_front_evaluations))).compute(referencePoint))
 #    current_hypervolume.write('%f \n' % hypervolume((np.asarray(simple_pareto_front_evaluations))).compute(referencePoint))
 #    current_hypervolume.close()            
-            
+#            
