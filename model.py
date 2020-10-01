@@ -8,7 +8,8 @@ class GaussianProcess:
         sqrdExp =  RBF(length_scale=1)
         self.xValues = []
         self.yValues = []
-        self.model = GaussianProcessRegressor(kernel=sqrdExp,normalize_y=True,n_restarts_optimizer=10)
+        self.model = GaussianProcessRegressor(kernel=sqrdExp,n_restarts_optimizer=10)
+#        self.model = GaussianProcessRegressor(kernel=sqrdExp,normalize_y=True,n_restarts_optimizer=10)
      
     def fitModel(self):
         self.model.fit(self.xValues, self.yValues)
