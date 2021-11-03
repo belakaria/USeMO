@@ -17,7 +17,7 @@ The code is implemented in Python and requires the following packages:
 4. [pygmo](https://esa.github.io/pygmo2/install.html) 
 
 ### Citation
-If you use this library in your academic work please cite our paper:
+If you use this code please cite our paper:
 
 ```bibtex
 
