@@ -17,6 +17,19 @@ The code is implemented in Python and requires the following packages:
 4. [pygmo](https://esa.github.io/pygmo2/install.html) 
 
 ### Citation
-If you use this library in your academic work please cite our AAAI 2020 paper: "Uncertainty-Aware Search Framework for Multi-Objective Bayesian Optimization", Syrine Belakaria, Aryan Deshwal, Nitthilan Kannappan Jayakodi, Janardhan Rao Doppa.
+If you use this library in your academic work please cite our paper:
 
+```bibtex
+
+@inproceedings{belakaria2020uncertainty,
+  title={Uncertainty-aware search framework for multi-objective Bayesian optimization},
+  author={Belakaria, Syrine and Deshwal, Aryan and Jayakodi, Nitthilan Kannappan and Doppa, Janardhan Rao},
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={34},
+  number={06},
+  pages={10044--10052},
+  year={2020}
+}
+
+````
 
